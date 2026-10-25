@@ -1,0 +1,103 @@
+<div style="font-family:Arial,Helvetica,sans-serif;color:#002d66;max-width:900px">
+<h1 style="color:#1a3a8f;border-bottom:4px solid #F7941D;padding-bottom:6px;margin:0 0 12px">Guia do projeto-base</h1>
+<p style="line-height:1.5;margin:6px 0">Este guia explica o projeto de <strong>cadastro de alunos</strong> que serve de modelo para os três temas.</p>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">Como rodar</h2>
+<pre style="background:#f5f7fc;padding:10px;border:1px solid #d4ddf0;border-radius:6px;overflow:auto"><code class="language-bash">npm install
+npx expo start
+</code></pre>
+<p style="line-height:1.5;margin:6px 0">Pressione <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">w</code> para abrir no navegador ou leia o QR Code com o app <strong>Expo Go</strong> no celular.</p>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">Mapa dos arquivos</h2>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:14px">
+<thead>
+<tr>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Arquivo</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">firebase.ts</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Inicializa o Firebase e exporta <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">auth</code> e <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">db</code>.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">components/frm-login.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Tela de login com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">signInWithEmailAndPassword</code>.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">components/frm-cad-aluno.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Formulário que cadastra (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">addDoc</code>) e altera (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">updateDoc</code>) conforme o parâmetro <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">id</code>.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">components/lst-aluno.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Lista (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">FlatList</code>) com botões Alterar e Excluir (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">deleteDoc</code>).</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">hooks/use-alunos.ts</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Hook que consulta a coleção (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">getDocs</code>) e um documento (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">getDoc</code>).</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">hooks/use-focus-refresh.ts</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Recarrega os dados toda vez que a tela recebe foco.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">app/(tabs)/_layout.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Barra de abas com as cores do tema.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">app/(tabs)/index.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Tela inicial com botão Sair (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">signOut</code>).</td>
+</tr>
+</tbody>
+</table>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">Fluxo de dados</h2>
+<ol style="line-height:1.5;margin:6px 0 6px 20px">
+<li><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">frm-login.tsx</code> autentica com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">signInWithEmailAndPassword</code> e vai para as abas.</li>
+<li><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">frm-cad-aluno.tsx</code> grava com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">addDoc</code> (cadastro) ou <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">updateDoc</code> (quando recebe <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">id</code>).</li>
+<li><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">use-alunos.ts</code> lê do Firestore (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">getDocs</code>/<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">getDoc</code>) e devolve os dados para a tela.</li>
+<li><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">lst-aluno.tsx</code> mostra os cartões; <strong>Alterar</strong> navega com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">router.push</code> passando o <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">id</code>; <strong>Excluir</strong> usa <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">deleteDoc</code>.</li>
+<li><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">use-focus-refresh.ts</code> recarrega a lista ao voltar para a tela.</li>
+<li>O botão <strong>Sair</strong> da tela inicial chama <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">signOut</code> e volta ao login.</li>
+</ol>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">Atenção: rotas com o mesmo caminho</h2>
+<p style="line-height:1.5;margin:6px 0">A tela de login (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">app/(auth)/index.tsx</code>) e a tela inicial (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">app/(tabs)/index.tsx</code>) têm ambas a rota <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">/</code>. Para voltar ao login use <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">router.replace('/(auth)')</code>, e não <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">router.replace('/')</code>.</p>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">Como adaptar para o seu tema</h2>
+<ol style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Copie <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">use-alunos.ts</code> para <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">use-&lt;seu-tema&gt;.ts</code> e troque a coleção e os campos.</li>
+<li>Copie o formulário e a lista trocando os campos e os textos.</li>
+<li>Ajuste as abas em <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">app/(tabs)/_layout.tsx</code>.</li>
+<li>Troque a configuração em <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">firebase.ts</code> pelo <strong>seu</strong> projeto Firebase.</li>
+</ol>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">Referências</h2>
+<h3 style="color:#002d66;margin:20px 0 6px">Expo</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><a style="color:#1a3a8f" href="https://docs.expo.dev/versions/v54.0.0/">Documentação do Expo SDK 54 (versão do projeto)</a></li>
+<li><a style="color:#1a3a8f" href="https://docs.expo.dev/router/introduction/">Expo Router – introdução</a></li>
+<li><a style="color:#1a3a8f" href="https://docs.expo.dev/router/advanced/tabs/">Expo Router – abas (Tabs)</a></li>
+<li><a style="color:#1a3a8f" href="https://docs.expo.dev/guides/using-firebase/">Usando Firebase com Expo</a></li>
+</ul>
+<h3 style="color:#002d66;margin:20px 0 6px">Firebase</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore">Firestore – visão geral</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/manage-data/add-data">Firestore – adicionar dados (addDoc, setDoc, updateDoc)</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/query-data/get-data">Firestore – ler dados (getDoc, getDocs)</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/manage-data/delete-data">Firestore – excluir dados (deleteDoc)</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/query-data/queries">Firestore – consultas simples e compostas (where, orderBy)</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/data-model">Firestore – subcoleções e modelo de dados</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/security/get-started">Firestore – regras de segurança</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/auth/web/password-auth">Authentication – e-mail e senha na Web</a></li>
+</ul>
+<h3 style="color:#002d66;margin:20px 0 6px">React e React Native</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><a style="color:#1a3a8f" href="https://react.dev/reference/react/useState">React – useState</a></li>
+<li><a style="color:#1a3a8f" href="https://react.dev/reference/react/useCallback">React – useCallback</a></li>
+<li><a style="color:#1a3a8f" href="https://react.dev/learn/reusing-logic-with-custom-hooks">React – criando seus próprios Hooks</a></li>
+<li><a style="color:#1a3a8f" href="https://reactnative.dev/docs/flatlist">React Native – FlatList</a></li>
+<li><a style="color:#1a3a8f" href="https://reactnative.dev/docs/textinput">React Native – TextInput</a></li>
+<li><a style="color:#1a3a8f" href="https://reactnative.dev/docs/stylesheet">React Native – StyleSheet</a></li>
+<li><a style="color:#1a3a8f" href="https://github.com/calintamas/react-native-toast-message">react-native-toast-message</a></li>
+</ul>
+<h3 style="color:#002d66;margin:20px 0 6px">TypeScript</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><a style="color:#1a3a8f" href="https://www.typescriptlang.org/docs/handbook/intro.html">TypeScript Handbook</a></li>
+</ul>
+</div>

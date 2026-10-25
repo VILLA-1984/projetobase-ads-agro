@@ -1,0 +1,515 @@
+<div style="font-family:Arial,Helvetica,sans-serif;color:#002d66;max-width:900px">
+<h1 style="color:#1a3a8f;border-bottom:4px solid #F7941D;padding-bottom:6px;margin:0 0 12px">Projeto 4: Tema Livre</h1>
+<blockquote style="background:#f5f7fc;border-left:4px solid #1a3a8f;margin:10px 0;padding:6px 12px;color:#002d66">
+<p style="line-height:1.5;margin:6px 0">Material para os alunos · React Native (Expo SDK 54) + Firebase · derivado do projeto-base de cadastro de alunos</p>
+</blockquote>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">1. Ideia do tema livre</h2>
+<p style="line-height:1.5;margin:6px 0">Aqui <strong>você escolhe o assunto</strong>. Pode ser um app útil para o seu dia a dia, para um pequeno negócio, para a escola ou para a família. O que não é livre são os <strong>requisitos técnicos</strong>: o app precisa usar o que aprendemos com o projeto-base (login, Firestore, hooks, abas) e cumprir o mínimo descrito abaixo.</p>
+<blockquote style="background:#f5f7fc;border-left:4px solid #1a3a8f;margin:10px 0;padding:6px 12px;color:#002d66">
+<p style="line-height:1.5;margin:6px 0"><strong>Antes de começar</strong>, entregue a proposta (Atividade 1) e espere a aprovação do professor.</p>
+</blockquote>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">2. Requisitos mínimos obrigatórios</h2>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Login e logout com Firebase Authentication.</li>
+<li><strong>Pelo menos 2 coleções</strong> no Firestore (ou 1 coleção + 1 subcoleção) com relação clara entre elas.</li>
+<li><strong>CRUD completo</strong> (cadastrar, listar, alterar e excluir) em pelo menos uma coleção.</li>
+<li>Um <strong>hook próprio</strong> para consultar o Firestore, seguindo o modelo <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">use-alunos.ts</code>.</li>
+<li>Mínimo de <strong>5 telas</strong> (contando o login) com navegação por abas.</li>
+<li>Validação dos campos e mensagens de erro/sucesso com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">Toast</code>.</li>
+<li><strong>Regras de segurança</strong> do Firestore que exijam usuário autenticado.</li>
+<li>Identidade visual própria e <strong>sem nenhuma tela de exemplo</strong> do template.</li>
+<li>Código em repositório Git, com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">README.md</code>.</li>
+</ul>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">3. O que não pode</h2>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Repetir o próprio projeto-base (cadastro de alunos) ou os temas 1, 2 e 3 só com outro nome.</li>
+<li>Guardar dados sensíveis reais de pessoas (CPF, endereço, saúde). Use dados fictícios.</li>
+<li>Publicar chaves ou senhas pessoais em repositório público.</li>
+</ul>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">4. O que você vai reaproveitar do projeto-base</h2>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:14px">
+<thead>
+<tr>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Arquivo</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">firebase.ts</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Inicializa o Firebase e exporta <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">auth</code> e <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">db</code>.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">components/frm-login.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Tela de login com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">signInWithEmailAndPassword</code>.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">components/frm-cad-aluno.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Formulário que cadastra (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">addDoc</code>) e altera (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">updateDoc</code>) conforme o parâmetro <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">id</code>.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">components/lst-aluno.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Lista (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">FlatList</code>) com botões Alterar e Excluir (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">deleteDoc</code>).</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">hooks/use-alunos.ts</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Hook que consulta a coleção (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">getDocs</code>) e um documento (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">getDoc</code>).</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">hooks/use-focus-refresh.ts</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Recarrega os dados toda vez que a tela recebe foco.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">app/(tabs)/_layout.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Barra de abas com as cores do tema.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">app/(tabs)/index.tsx</code></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Tela inicial com botão Sair (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">signOut</code>).</td>
+</tr>
+</tbody>
+</table>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">5. Cardápio de diferenciais (escolha no mínimo 3)</h2>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:14px">
+<thead>
+<tr>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Diferencial</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">O que precisa ter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Subcoleção relacionada</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Registros filhos de outro (ex.: itens de um pedido, comentários de uma tarefa) em <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">colecao/{id}/sub</code>.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Dados por usuário</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Cada usuário vê apenas os <strong>seus</strong> registros (campo <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">uid</code> gravado com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">auth.currentUser.uid</code> + regra de segurança correspondente).</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Busca e filtros</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Busca por texto e filtro por categoria/status na lista, usando <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">where</code> ou filtro no app.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Ordenação e agrupamento</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Lista ordenada (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">orderBy</code>) e/ou agrupada por categoria, data ou status.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Painel de resumo</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Tela inicial com contadores/totais calculados a partir do Firestore (ex.: itens por status, soma de valores).</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Mudança de status com um toque</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Alternar o estado de um registro (ex.: pendente ↔ concluído) direto na lista.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Cadastro de usuário</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Tela de criar conta (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">createUserWithEmailAndPassword</code>) e recuperação de senha.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Perfil do usuário</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Tela com os dados do usuário logado e edição de um documento <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">perfis/{uid}</code>.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Recurso nativo do Expo</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Usar um módulo do Expo SDK 54 (ex.: localização, câmera ou seletor de imagem) integrado ao app.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Atualização em tempo real</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Usar <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">onSnapshot</code> para a lista atualizar sozinha, sem recarregar a tela.</td>
+</tr>
+</tbody>
+</table>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">6. Ideias de inspiração (opcional)</h2>
+<p style="line-height:1.5;margin:6px 0">Se não souber por onde começar:</p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Agenda de consultas ou compromissos</li>
+<li>Controle de gastos pessoais</li>
+<li>Lista de compras compartilhada</li>
+<li>Diário de estudos ou de treinos</li>
+<li>Biblioteca de livros, filmes ou jogos</li>
+<li>Livro de receitas</li>
+<li>Cadastro de pets para adoção</li>
+<li>Organizador de eventos e convidados</li>
+<li>Controle de tarefas de uma equipe</li>
+<li>Catálogo de produtos de um pequeno comércio</li>
+</ul>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">7. Modelo da proposta (1 página)</h2>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:14px">
+<thead>
+<tr>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Item</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">O que escrever</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Nome do app</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Um nome curto e a ideia em uma frase</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Problema</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Que problema resolve e para quem</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Funcionalidades</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Lista das principais funcionalidades</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Dados</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Coleções e subcoleções, com os campos e tipos de cada uma</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Telas</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Lista das telas (mínimo 5) e como o usuário navega entre elas</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Diferenciais</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Os 3 (ou mais) itens do cardápio que pretende fazer</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Integrantes</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Nomes e quem faz o quê</td>
+</tr>
+</tbody>
+</table>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">8. Atividades</h2>
+<p style="line-height:1.5;margin:6px 0">As atividades são sequenciais. Total: <strong>100 pontos</strong>.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 1 – Proposta e preparação do ambiente (5 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Escrever a <strong>proposta do projeto</strong> (1 página, modelo na seção 7): problema, público, funcionalidades, dados e telas.</li>
+<li>Entregar a proposta ao professor e <strong>aguardar a aprovação</strong> antes de seguir para as demais atividades.</li>
+<li>Criar o <strong>seu</strong> projeto no console do Firebase, ativar <strong>Authentication (e-mail/senha)</strong> e <strong>Firestore</strong>.</li>
+<li>Trocar a configuração em <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">firebase.ts</code> e cadastrar um usuário de teste.</li>
+<li>Definir regras do Firestore que aceitem apenas usuários autenticados (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">request.auth != null</code>).</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Proposta aprovada + print do app rodando e do console do Firebase.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> Proposta completa e viável; Firebase é o do grupo; regras não estão abertas para qualquer pessoa.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 2 – Autenticação (login e logout) (10 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Adaptar a tela de login do modelo à identidade do seu app.</li>
+<li>Mostrar mensagem de erro com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">Toast</code> quando usuário/senha forem inválidos.</li>
+<li>Implementar o botão <strong>Sair</strong> que encerra a sessão e volta ao login (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">router.replace('/(auth)')</code>).</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Vídeo curto (até 1 min) ou prints: login correto, login errado, logout.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> Login/erro/logout funcionam; o Sair volta para a tela de login.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 3 – Cadastro da entidade principal (10 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Criar o formulário com todos os campos definidos na proposta, validando obrigatórios e tipos.</li>
+<li>Gravar com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">addDoc</code> e mostrar <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">Toast</code> de sucesso ou erro.</li>
+<li>Limpar o formulário após salvar.</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Prints do formulário preenchido e do documento criado no Firestore.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> Dados chegam ao Firestore com os tipos certos (números como <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">number</code>).</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 4 – Listagem (10 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Criar um <strong>hook próprio</strong> (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">hooks/use-&lt;seu-tema&gt;.ts</code>) seguindo o modelo <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">use-alunos.ts</code>.</li>
+<li>Listar com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">FlatList</code> em cartões e recarregar ao voltar para a tela (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">useFocusRefresh</code>).</li>
+<li>Mostrar mensagem amigável quando a lista estiver vazia.</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Print da lista com pelo menos 5 registros.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> A lista atualiza sozinha após cadastrar/alterar/excluir.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 5 – Alteração e exclusão (15 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Botão <strong>Alterar</strong> abre o formulário com os dados carregados (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">getDoc</code> + parâmetro <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">id</code>).</li>
+<li>No modo edição, o botão muda para <strong>Alterar</strong> e grava com <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">updateDoc</code>.</li>
+<li>Botão <strong>Excluir</strong> com confirmação (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">Alert</code>) antes de <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">deleteDoc</code>.</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Vídeo curto ou prints do fluxo: alterar um registro e excluir outro.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> Edição não cria registro duplicado; exclusão pede confirmação.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 6 – Identidade visual (5 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Definir (e justificar na documentação) a paleta de cores e o nome do app.</li>
+<li>Usar nomes de abas claros e ícones coerentes.</li>
+<li>Remover do app todo conteúdo de exemplo do template do Expo.</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Prints de todas as telas.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> Visual consistente entre telas; nenhuma tela de template sobrando.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 7 – Diferenciais escolhidos (cardápio) (20 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Escolher <strong>no mínimo 3 itens</strong> do cardápio de diferenciais e implementá-los (seção 5).</li>
+<li>Pelo menos <strong>1 item</strong> deve envolver uma <strong>segunda coleção ou subcoleção</strong>.</li>
+<li>Registrar na documentação quais itens foram escolhidos e por quê.</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Vídeo curto (até 2 min) mostrando cada diferencial e prints do Firestore.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> Os itens funcionam e os dados ficam consistentes entre as coleções.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 8 – Documentação e repositório (10 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Escrever o <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">README.md</code> do seu projeto: objetivo, como rodar, telas e modelo de dados.</li>
+<li>Comentar o código nos pontos principais (hooks e consultas ao Firestore).</li>
+<li>Subir o código em um repositório Git com commits ao longo do projeto.</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Link do repositório + README + apresentação.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> Qualquer colega consegue rodar o projeto seguindo o seu README.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Atividade 9 – Apresentação em grupo (até 15 minutos) (15 pontos)</h3>
+<p style="line-height:1.5;margin:6px 0"><strong>O que fazer</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Montar os slides seguindo o <strong>roteiro de apresentação</strong> descrito no fim deste documento.</li>
+<li>Mostrar o app funcionando (demonstração ao vivo ou vídeo de reserva).</li>
+<li>Explicar a ferramenta (Expo/React Native e Firebase) e os <strong>desafios</strong> que o grupo enfrentou com o framework e com a tecnologia.</li>
+<li>Dividir a fala entre <strong>todos</strong> os integrantes e respeitar o tempo de 15 minutos.</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Entregável:</strong> Slides (PDF) entregues antes da apresentação + apresentação oral.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Critério principal:</strong> Cumpre o roteiro, o tempo e mostra domínio do que foi construído (cada integrante responde perguntas).</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Desafios extras (opcionais, +5 pontos cada, até 10)</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Modo escuro respeitando o tema do sistema</li>
+<li>Publicar a versão web e apresentar o link</li>
+</ul>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">9. Cronograma sugerido</h2>
+<p style="line-height:1.5;margin:6px 0"><strong>Antes da semana 1:</strong> entregar a proposta e aguardar a aprovação.</p>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:14px">
+<thead>
+<tr>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Período</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Atividades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Semana 1</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Atividades 1 e 2</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Semana 2</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Atividades 3 e 4</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Semana 3</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Atividades 5 e 6</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Semana 4</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Atividade 7</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Semana 5</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Atividades 8 e 9 (documentação e apresentações)</td>
+</tr>
+</tbody>
+</table>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">10. Avaliação</h2>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:14px">
+<thead>
+<tr>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Atividade</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Pontos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">1 – Proposta e preparação do ambiente</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">5</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">2 – Autenticação (login e logout)</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">10</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">3 – Cadastro da entidade principal</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">10</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">4 – Listagem</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">10</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">5 – Alteração e exclusão</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">15</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">6 – Identidade visual</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">5</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">7 – Diferenciais escolhidos (cardápio)</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">20</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">8 – Documentação e repositório</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">10</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">9 – Apresentação em grupo (até 15 minutos)</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">15</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Total</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
+<p style="line-height:1.5;margin:6px 0">O que descontamos: projeto sem aprovação da proposta, requisitos mínimos faltando, chaves/senhas pessoais no repositório público, código copiado sem entender, telas do template sobrando, app que não abre.</p>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">11. Dicas importantes</h2>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><strong>Leia a documentação da versão certa</strong>: este projeto usa Expo SDK 54 (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">https://docs.expo.dev/versions/v54.0.0/</code>).</li>
+<li>Comece pequeno: faça o CRUD de uma coleção funcionando antes de pensar nos diferenciais.</li>
+<li>Faça commits pequenos e frequentes: um por atividade, no mínimo.</li>
+<li>Se o Firestore recusar a gravação, veja o código do erro no <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">Toast</code> e revise as regras de segurança.</li>
+<li>Paleta de cores do projeto-base (use ou troque): <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">#1a3a8f</code> azul principal, <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">#002d66</code> azul escuro (texto), <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">#F7941D</code> laranja de destaque (botões), <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">#f5f7fc</code> fundo claro, <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">#e85d04</code> laranja-escuro (ações destrutivas).</li>
+</ul>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">12. Apresentação final e roteiro (até 15 minutos por grupo)</h2>
+<p style="line-height:1.5;margin:6px 0">Cada grupo apresentará o projeto para a turma. A apresentação vale <strong>15 pontos</strong> (Atividade 9). Todos os integrantes devem falar e responder perguntas.</p>
+<h3 style="color:#002d66;margin:20px 0 6px">Roteiro sugerido</h3>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:14px">
+<thead>
+<tr>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">#</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Tópico</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Tempo</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">O que abordar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">1</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Abertura e problema</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">1 min</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Nome do grupo, tema escolhido e o problema real que o app resolve.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">2</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Demonstração do app</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">3 min</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Fluxo completo: login, cadastro, lista, alteração, exclusão e a funcionalidade diferencial. Tenha um vídeo de reserva.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">3</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">A ferramenta: Expo e React Native</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">2 min</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">O que é React Native e o que o Expo acrescenta (Expo Go, Expo Router, rodar no celular e no navegador). Por que usar.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">4</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Firebase: Authentication e Firestore</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">2 min</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Como funciona o login por e-mail/senha, coleções e subcoleções, e as regras de segurança. Mostre o console.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">5</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Arquitetura do projeto</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">2 min</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Organização de pastas, componentes, hooks (ex.: <code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">use-alunos</code>) e o caminho de um dado: tela → hook → Firestore → tela.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">6</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Desafios com o framework</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">2 min</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Problemas com React Native/Expo/Expo Router e como foram resolvidos (veja as sugestões do seu tema).</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">7</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Desafios com a tecnologia</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">2 min</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Problemas com Firebase/Firestore/TypeScript e como foram resolvidos (veja as sugestões do seu tema).</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">8</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Aprendizados e próximos passos</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">1 min</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">O que o grupo aprendeu, o que faria diferente e o que melhoraria no app.</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Total</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>15 min</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"></td>
+</tr>
+</tbody>
+</table>
+<h3 style="color:#002d66;margin:20px 0 6px">Desafios sugeridos para o seu tema</h3>
+<p style="line-height:1.5;margin:6px 0">Escolha os que o seu grupo realmente enfrentou e conte <strong>o problema, o que tentaram e a solução</strong>.</p>
+<p style="line-height:1.5;margin:6px 0"><strong>Framework (React Native / Expo / Expo Router)</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Decidir como dividir o app em telas e abas e navegar entre elas passando parâmetros (Expo Router)</li>
+<li>Manter as telas atualizadas ao voltar para elas sem causar loop de renderização</li>
+</ul>
+<p style="line-height:1.5;margin:6px 0"><strong>Tecnologia (Firebase / Firestore / TypeScript)</strong></p>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Modelar os dados no Firestore (o que vira coleção, o que vira subcoleção)</li>
+<li>Escrever regras de segurança que combinem com o modelo escolhido</li>
+</ul>
+<blockquote style="background:#f5f7fc;border-left:4px solid #1a3a8f;margin:10px 0;padding:6px 12px;color:#002d66">
+<p style="line-height:1.5;margin:6px 0">Além dos sugeridos, vale citar os desafios comuns: rotas com o mesmo caminho (<code style="background:#eef2f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:90%">/</code> do login e da tela inicial), loop de renderização por callback não memorizado e números gravados como texto.</p>
+</blockquote>
+<h3 style="color:#002d66;margin:20px 0 6px">Checklist antes de apresentar</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li>Slides prontos (cerca de 1 por minuto) e enviados em PDF.</li>
+<li>App rodando, com dados de exemplo já cadastrados.</li>
+<li>Vídeo de reserva caso a internet ou o Firebase falhe.</li>
+<li>Falas divididas entre todos os integrantes; tempo ensaiado.</li>
+<li>Chaves e senhas pessoais <strong>fora</strong> dos slides.</li>
+</ul>
+<h3 style="color:#002d66;margin:20px 0 6px">Avaliação da apresentação</h3>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:14px">
+<thead>
+<tr>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Critério</th>
+<th style="background:#1a3a8f;color:#ffffff;text-align:left;padding:6px 8px;border:1px solid #d4ddf0">Pontos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Conteúdo técnico (ferramenta e arquitetura corretas)</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">5</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Desafios enfrentados e soluções (framework e tecnologia)</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">4</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Demonstração funcionando</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">3</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">Clareza, divisão da fala e respeito ao tempo</td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top">3</td>
+</tr>
+<tr>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>Total</strong></td>
+<td style="padding:6px 8px;border:1px solid #d4ddf0;vertical-align:top"><strong>15</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 style="color:#1a3a8f;margin:28px 0 8px;border-left:6px solid #F7941D;padding-left:10px">13. Referências</h2>
+<h3 style="color:#002d66;margin:20px 0 6px">Expo</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><a style="color:#1a3a8f" href="https://docs.expo.dev/versions/v54.0.0/">Documentação do Expo SDK 54 (versão do projeto)</a></li>
+<li><a style="color:#1a3a8f" href="https://docs.expo.dev/router/introduction/">Expo Router – introdução</a></li>
+<li><a style="color:#1a3a8f" href="https://docs.expo.dev/router/advanced/tabs/">Expo Router – abas (Tabs)</a></li>
+<li><a style="color:#1a3a8f" href="https://docs.expo.dev/guides/using-firebase/">Usando Firebase com Expo</a></li>
+</ul>
+<h3 style="color:#002d66;margin:20px 0 6px">Firebase</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore">Firestore – visão geral</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/manage-data/add-data">Firestore – adicionar dados (addDoc, setDoc, updateDoc)</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/query-data/get-data">Firestore – ler dados (getDoc, getDocs)</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/manage-data/delete-data">Firestore – excluir dados (deleteDoc)</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/query-data/queries">Firestore – consultas simples e compostas (where, orderBy)</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/data-model">Firestore – subcoleções e modelo de dados</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/firestore/security/get-started">Firestore – regras de segurança</a></li>
+<li><a style="color:#1a3a8f" href="https://firebase.google.com/docs/auth/web/password-auth">Authentication – e-mail e senha na Web</a></li>
+</ul>
+<h3 style="color:#002d66;margin:20px 0 6px">React e React Native</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><a style="color:#1a3a8f" href="https://react.dev/reference/react/useState">React – useState</a></li>
+<li><a style="color:#1a3a8f" href="https://react.dev/reference/react/useCallback">React – useCallback</a></li>
+<li><a style="color:#1a3a8f" href="https://react.dev/learn/reusing-logic-with-custom-hooks">React – criando seus próprios Hooks</a></li>
+<li><a style="color:#1a3a8f" href="https://reactnative.dev/docs/flatlist">React Native – FlatList</a></li>
+<li><a style="color:#1a3a8f" href="https://reactnative.dev/docs/textinput">React Native – TextInput</a></li>
+<li><a style="color:#1a3a8f" href="https://reactnative.dev/docs/stylesheet">React Native – StyleSheet</a></li>
+<li><a style="color:#1a3a8f" href="https://github.com/calintamas/react-native-toast-message">react-native-toast-message</a></li>
+</ul>
+<h3 style="color:#002d66;margin:20px 0 6px">TypeScript</h3>
+<ul style="line-height:1.5;margin:6px 0 6px 20px">
+<li><a style="color:#1a3a8f" href="https://www.typescriptlang.org/docs/handbook/intro.html">TypeScript Handbook</a></li>
+</ul>
+</div>

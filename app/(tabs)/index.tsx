@@ -1,98 +1,111 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { auth } from '@/firebase';
+import { router } from 'expo-router';
+import { signOut } from 'firebase/auth';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  async function sair() {
+    await signOut(auth);
+    router.replace('/(auth)');
+  }
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  return (
+    <SafeAreaView style={styles.container}>
+      <TouchableOpacity style={styles.sair} onPress={sair}>
+        <Text style={styles.sairTexto}>Sair</Text>
+      </TouchableOpacity>
+
+      <View style={styles.header}>
+        <Text style={styles.brand}>
+          Uni<Text style={styles.brandAccent}>Senai</Text>
+        </Text>
+        <Text style={styles.subtitle}>Gestão de Alunos</Text>
+      </View>
+
+      <View style={styles.content}>
+        <Text style={styles.title}>Bem-vindo!</Text>
+        <Text style={styles.text}>Cadastre novos alunos ou consulte, altere e exclua os já cadastrados.</Text>
+
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/(tabs)/aluno')}>
+          <Text style={styles.buttonText}>Cadastrar aluno</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary]}
+          onPress={() => router.push('/(tabs)/lstAlunos')}>
+          <Text style={styles.buttonText}>Ver alunos</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    backgroundColor: '#1a3a8f',
+  },
+  sair: {
+    alignSelf: 'flex-end',
+    marginTop: 12,
+    marginRight: 16,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ffffffb3',
+  },
+  sairTexto: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+  },
+  header: {
     alignItems: 'center',
-    gap: 8,
+    paddingVertical: 32,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  brand: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#ffffff',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  brandAccent: {
+    color: '#F7941D',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#ffffffb3',
+    marginTop: 4,
+  },
+  content: {
+    flex: 1,
+    backgroundColor: '#f5f7fc',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    padding: 24,
+    gap: 12,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#002d66',
+  },
+  text: {
+    fontSize: 16,
+    color: '#002d66',
+    marginBottom: 12,
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#F7941D',
+    borderRadius: 8,
+    padding: 14,
+  },
+  buttonSecondary: {
+    backgroundColor: '#1a3a8f',
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
